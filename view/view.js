@@ -8,7 +8,6 @@ import CATEGORIES from '../data.js';
 class View {
   constructor() {
     this.app = this.getElement('#root');
-    console.log(this.app);
 
     this.title = this.createElement('h1');
     this.title.textContent = 'Harry Potter Magic Quiz';
@@ -17,7 +16,7 @@ class View {
     this.input = this.createElement('input');
     this.input.type = 'text';
     this.input.placeholder = 'What is your name?';
-    this.input.name = 'todo';
+    this.input.name = 'name';
     this.submitButton = this.createElement('button');
     this.submitButton.textContent = 'START THE GAME';
     this.form.append(this.input, this.submitButton);
@@ -49,7 +48,7 @@ class View {
   }
 
   showCategories() {
-    this.categories = this.createElement('div', 'categories');
+    this.categories = this.createElement('main', 'categories');
     const categories = [];
     CATEGORIES.forEach((category) => {
       categories.push(this.createButton(`${category}`, `${category}`));
@@ -64,9 +63,24 @@ class View {
     this.getElement('.categories').remove();
   }
 
-  bindChooseCategory(handler) {
-    const button = this.getElement('button');
+  saveToLocalStorageButton() {
+    this.localstoragebutton = this.createButton('Localstorage', 'localstorage');
+    console.log(this.localstoragebutton);
+    // Adding categories div to the #root
+    this.app.append(this.localstoragebutton);
+  }
+
+  bindLocalStorage(handler) {
+    const button = document.getElementsByClassName('localstorage')[0];
     console.log(button);
+    button.addEventListener('click', (event) => {
+      event.preventDefault();
+      console.log('You have clicke localstorage button');
+      handler();
+    });
+  }
+
+  bindChooseCategory(handler) {
     const buttons = this.getElementsByTag('button');
     for (const btn of buttons) {
       btn.addEventListener('click', (event) => {
