@@ -9,8 +9,10 @@ class View {
   constructor() {
     this.app = this.getElement('#root');
 
+    this.logo = this.createElement('div', 'logo');
     this.title = this.createElement('h1');
-    this.title.textContent = 'Harry Potter Magic Quiz';
+    this.title.textContent = 'Harry Potter';
+    this.logo.append(this.title);
 
     this.form = this.createElement('form');
     this.input = this.createElement('input');
@@ -21,7 +23,7 @@ class View {
     this.submitButton.textContent = 'START THE GAME';
     this.form.append(this.input, this.submitButton);
 
-    this.app.append(this.title, this.form);
+    this.app.append(this.logo, this.form);
   }
 
   createElement(tag, className) {
